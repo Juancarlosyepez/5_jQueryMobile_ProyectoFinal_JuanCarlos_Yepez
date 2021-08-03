@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+  	<title>Registro Hoteles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.4.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.4.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="js/RegistroHoteles.js"></script>
+  </head>
+  <body>
+ <!----------------------pagina Inicio---------------------->
+  	<div data-role="page" id="paginaInicio">
+  		<div data-role="header">
+  			<h1>Gestión Hotel</h1>
+  		</div>
+
+  		<div data-role="content">
+  			<a id="btnRegistroHotel" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow-icon">Registro Hotel</a>
+  			<a id="btnListaHotel" class="ui-btn ui-icon-bars ui-btn-icon-left ui-shadow-icon">Lista Hoteles</a>
+  		</div>
+
+  		<div data-role="footer">
+  			<p align="center">Gestión Hotel</p>
+  		</div>		
+  	</div>
+  <!------------pagina de registro de Hotel--------------------------> 
+  	<div data-role="page" id="paginaRegistroHotel">
+  		<div data-role="header">
+  			<h1>Registro Hotel</h1>
+  		</div>
+
+  		<div data-role="content">
+  			<form>
+           <div class="ui-field-contain">
+              <label for="nombre">Nombre:</label>
+              <input type="text" name="nombre" id="nombre">
+           </div>
+           <div>
+              <label for="ubicacion">Ubicación:</label>
+           </div>
+           <div data-role="content" id="divMapa">
+           </div>
+           <fieldset class="ui-grid-b">
+                <div class="ui-block-a">
+                  <input type="text" placeholder="Latitud" readonly id="miLat" >
+                </div>
+                <div class="ui-block-b">
+                  <input type="text" placeholder="Longitud" readonly id="miLng" >
+                </div>
+                <div class="ui-block-c">
+                  <a id="btnDelMark" class="ui-btn ui-icon-delete ui-btn-icon-right ui-shadow-icon" >Deshacer Marcador</a>
+                </div>
+           </fieldset>
+                
+              <label for="ciudad">Ciudad:</label>
+              <input type="text" name="ciudad" id="ciudad">
+              <hr>
+              <label for="telefono">Telefono:</label>
+              <input type="text" name="telefono" id="telefono">
+              <hr>
+              <label for="estrellas">Estrellas:</label>
+              <select name="estrellas" id="estrellas">
+                
+                <option value="1">1 Estrella</option>
+                <option value="2">2 Estrellas</option>
+                <option value="3">3 Estrellas</option>
+                <option value="4">4 Estrellas</option>
+                <option value="5">5 Estrellas</option>
+                <option value="0" >Escoja la cantidad de estrellas</option>
+              </select>  
+        </form>
+        <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                <a id="btnGuardarHotel" class="ui-btn ui-icon-check ui-btn-icon-left ui-shadow-icon" >Registrar Hotel</a>
+                </div>
+                <div class="ui-block-b">
+                <a id="btnLimpiarCampos" class="ui-btn ui-icon-delete ui-btn-icon-right ui-shadow-icon" >Limpiar Campos</a>
+                </div>
+        </fieldset>
+
+
+
+        <a class="ui-btn ui-icon-home ui-btn-icon-right ui-shadow-icon volver">Volver</a>
+  		</div>
+      <!------------------------------popup dialogo--------------------------->   
+       <div data-role="popup" id="popupDialogoResultado" data-dismissible="false" style="width:300px;">
+          <div data-role="header">
+            <h1>Registro</h1>
+          </div>
+          <div role="main" class="ui-content">
+            <h3 id="resultado"></h3>
+            <a href="#" class="ui-btn" data-rel="back">Ok</a>
+          </div>
+       </div> 
+  	</div>
+
+ <!--------------pagina de listado de hoteles--------------------------------------->   
+    <div data-role="page" id="paginaListaHoteles">
+        <div data-role="header">
+          <h1>Listado de Hoteles</h1>
+        </div>
+        <div data-role="content">
+            <div data-role="collapsibleset" data-theme="b" data-content-theme="b" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                <div data-role="collapsible" >
+                    <h3>Hoteles de Una Estrella</h3>
+                    <ul data-role="listview" id="unaEstrella" data-split-icon="delete" data-split-theme="b" data-inset="true">
+                    
+                    </ul>
+                </div>
+                <div data-role="collapsible">
+                    <h3>Hoteles de Dos Estrellas</h3>
+                    <ul data-role="listview" id="dosEstrellas" data-split-icon="delete" data-split-theme="b" data-inset="true">
+                    </ul>
+                </div>
+                <div data-role="collapsible" >
+                    <h3>Hoteles de Tres Estrellas</h3>
+                    <ul data-role="listview" id="tresEstrellas" data-split-icon="delete" data-split-theme="b" data-inset="true">   
+                     </ul>
+                </div>
+                <div data-role="collapsible" >
+                    <h3>Hoteles de Cuatro Estrellas</h3>
+                    <ul data-role="listview" id="cuatroEstrellas" data-split-icon="delete" data-split-theme="b" data-inset="true">
+                    </ul>
+                </div>
+                <div data-role="collapsible" >
+                    <h3>Hoteles de Cinco Estrellas</h3>
+                    <ul data-role="listview" id="cincoEstrellas" data-split-icon="delete" data-split-theme="b" data-inset="true">
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <a class="ui-btn ui-icon-home ui-btn-icon-right ui-shadow-icon  volver" data-theme="b">Volver</a>
+     </div>
+
+<!------------------------------------pagina Datos Hotel----------------------------------->
+        <div data-role="page" id="paginaDatosHotel"  >
+          <div data-role="header">
+            <h1>Datos de Hotel</h1>
+          </div>
+          <div data-role="content" class="ui-content" >
+            <div data-role="content" id="informacion">
+
+              <p id="informacion">Informacion de Punto:</p>
+            </div>
+            <div>
+              <label for="ubicacion">Ubicación:</label>
+            </div>
+            <div data-role="content" id="divMapaInf">
+              
+            </div>
+          </div>
+          
+          <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                  <input type="text" placeholder="Latitud" readonly id="miLatInf" >
+                </div>
+                <div class="ui-block-b">
+                  <input type="text" placeholder="Longitud" readonly id="miLngInf" >
+                </div>
+                
+           </fieldset>
+           <div>
+              <a href="#" class="ui-btn" data-rel="back">Lista Hoteles</a>
+          </div>
+       </div> 
+
+  </body>
+</html>
